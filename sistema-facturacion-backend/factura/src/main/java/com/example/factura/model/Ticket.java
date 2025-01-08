@@ -41,6 +41,12 @@ public class Ticket {
     public Ticket() {
     }
 
+    public Ticket(Long folio, Long codigoFacturacion, Sucursal sucursal) {
+        this.folio = folio;
+        this.codigoFacturacion = codigoFacturacion;
+        this.sucursal = sucursal;
+    }
+
     public Ticket(Date date, Long folio, Long codigoFacturacion, Sucursal sucursal, double total,
             List<Producto> productos) {
         this.date = date;

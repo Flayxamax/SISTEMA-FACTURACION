@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -56,6 +55,16 @@ public class SucursalService {
 
     public Sucursal getReferenceById(Long id) {
         return sucursalRepository.getReferenceById(id);
+    }
+
+    public Sucursal getByName(String nombre) {
+        List<Sucursal> sucursales = sucursalRepository.findAll();
+        for (Sucursal sucursal : sucursales) {
+            if (sucursal.getNombre().equalsIgnoreCase(nombre)) {
+                return sucursal;
+            }
+        }
+        return null;
     }
 
     public <S extends Sucursal> List<S> findAll(Example<S> example) {

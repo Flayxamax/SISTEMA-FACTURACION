@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -13,6 +12,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 
+import com.example.factura.model.Sucursal;
 import com.example.factura.model.Ticket;
 import com.example.repository.TicketRepository;
 
@@ -21,6 +21,9 @@ public class TicketService {
 
     @Autowired
     private TicketRepository ticketRepository;
+
+    @Autowired
+    private SucursalService sucursalService;
 
     public void flush() {
         ticketRepository.flush();
@@ -48,6 +51,14 @@ public class TicketService {
 
     public Ticket getOne(Long id) {
         return ticketRepository.findById(id).orElse(null);
+    }
+
+    public Ticket getByAttributes(Long folio, Long codigoFacturacion, String sucursalNombre) {
+        Sucursal sucursal = sucursalService.getByName(sucursalNombre);
+        if (sucursal != null) {
+            return ticketRepository.findOne(Example.of(new Ticket(folio, codigoFacturacion, sucursal))).orElse(null);
+        }
+        return null;
     }
 
     public Ticket getById(Long id) {

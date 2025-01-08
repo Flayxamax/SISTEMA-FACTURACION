@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 		"com.example.service", "com.example.factura.rest", "com.example.repository" })
 @EnableAutoConfiguration
 @ComponentScan({ "com.example.service", "com.example.factura.rest", "com.example.repository" })
-@EnableJpaRepositories(basePackages="com.example.repository")
+@EnableJpaRepositories(basePackages = "com.example.repository")
 public class FacturaApplication {
 
 	public static void main(String[] args) {
@@ -24,7 +24,7 @@ public class FacturaApplication {
 	public WebMvcConfigurer corsConfigurer() {
 		return new WebMvcConfigurer() {
 			@Override
-			public void addCorsMappings(CorsRegistry registry) {
+			public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*")
 						.allowedHeaders("*");
 			}
