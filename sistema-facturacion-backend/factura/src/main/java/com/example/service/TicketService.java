@@ -12,9 +12,12 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
 
-import com.example.factura.model.Sucursal;
 import com.example.factura.model.Ticket;
 import com.example.repository.TicketRepository;
+
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.persistence.TypedQuery;
 
 @Service
 public class TicketService {
@@ -22,8 +25,8 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
-    @Autowired
-    private SucursalService sucursalService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public void flush() {
         ticketRepository.flush();
@@ -53,12 +56,14 @@ public class TicketService {
         return ticketRepository.findById(id).orElse(null);
     }
 
-    public Ticket getByAttributes(Long folio, Long codigoFacturacion, String sucursalNombre) {
-        Sucursal sucursal = sucursalService.getByName(sucursalNombre);
-        if (sucursal != null) {
-            return ticketRepository.findOne(Example.of(new Ticket(folio, codigoFacturacion, sucursal))).orElse(null);
-        }
-        return null;
+    public Ticket getByAttributes(Long folio, Long codigoFacturacion, Long sucursalId) {
+        String jpql = "SELECT t FROM Ticket t WHERE t.folio = :folio AND t.codigoFacturacion = :codigoFacturacion AND t.sucursal.id = :sucursalId";
+        TypedQuery<Ticket> query = entityManager.createQuery(jpql, Ticket.class);
+        query.setParameter("folio", folio);
+        query.setParameter("codigoFacturacion", codigoFacturacion);
+        query.setParameter("sucursalId", sucursalId);
+
+        return query.getResultStream().findFirst().orElse(null);
     }
 
     public Ticket getById(Long id) {

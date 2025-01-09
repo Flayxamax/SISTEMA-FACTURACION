@@ -2,5 +2,19 @@
   <app-header></app-header>
   <main>
     <router-outlet></router-outlet>
+    <ngx-sonner-toaster
+      [toastOptions]="{
+        unstyled: true,
+        classes: {
+          toast:
+            'flex items-center shadow-xl rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg xl:max-w-xl mx-4 my-8 p-4 text-sm sm:text-base md:text-lg gap-x-4',
+          error: 'bg-red-500 text-white',
+          success: 'bg-green-500 text-white',
+          warning: 'text-yellow-500',
+          info: 'bg-blue-500 text-white'
+        },
+      }"
+    >
+    </ngx-sonner-toaster>
   </main>
 </div>

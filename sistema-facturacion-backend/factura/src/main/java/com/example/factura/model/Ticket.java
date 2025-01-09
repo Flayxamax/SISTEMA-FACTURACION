@@ -88,7 +88,7 @@ public class Ticket {
     public void setCodigoFacturacion(Long codigoFacturacion) {
         this.codigoFacturacion = codigoFacturacion;
     }
-
+    
     public Sucursal getSucursal() {
         return sucursal;
     }
