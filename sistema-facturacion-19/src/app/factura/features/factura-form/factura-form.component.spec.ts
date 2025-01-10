@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import TicketFormComponent from './ticket-form.component';
+import { FacturaFormComponent } from './factura-form.component';
 
-describe('TicketFormComponent', () => {
-  let component: TicketFormComponent;
-  let fixture: ComponentFixture<TicketFormComponent>;
+describe('FacturaFormComponent', () => {
+  let component: FacturaFormComponent;
+  let fixture: ComponentFixture<FacturaFormComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TicketFormComponent]
+      imports: [FacturaFormComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TicketFormComponent);
+    fixture = TestBed.createComponent(FacturaFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

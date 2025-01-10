@@ -10,6 +10,9 @@ import { Sucursal } from '../../../shared/interfaces/sucursal';
 import { TicketDTO, TicketService } from '../../data-access/ticket.service';
 import { toast } from 'ngx-sonner';
 import { isRequired } from '../../utils/validators';
+import { Router } from '@angular/router';
+import { Ticket } from '../../../shared/interfaces/ticket';
+import { StorageTicketService } from '../../../shared/data-access/storage-ticket.service';
 
 @Component({
   selector: 'app-ticket-form',
@@ -21,6 +24,8 @@ export default class TicketFormComponent {
   private _formBuilder = inject(FormBuilder);
   private _sucursalService = inject(SucursalService);
   private _ticketService = inject(TicketService);
+  private _router = inject(Router);
+  private _storageTicket = inject(StorageTicketService);
 
   isRequired(field: 'folio' | 'codigoFacturacion' | 'sucursal') {
     return isRequired(field, this.ticketForm);
@@ -50,6 +55,7 @@ export default class TicketFormComponent {
       }
     );
   }
+
   async onSubmit() {
     if (this.ticketForm.invalid) return;
 
@@ -57,26 +63,28 @@ export default class TicketFormComponent {
     const ticket: TicketDTO = {
       folio: Number(folio) || 0,
       codigoFacturacion: Number(codigoFacturacion) || 0,
-      sucursal_id: Number(sucursal) || 0,
+      sucursal: { id: Number(sucursal) || 0 } as Sucursal,
     };
 
     this._ticketService
       .getTicketByParams(
         ticket.folio,
         ticket.codigoFacturacion,
-        ticket.sucursal_id
+        ticket.sucursal.id
       )
       .subscribe(
-        (foundTicket) => {
+        (foundTicket: Ticket) => {
           if (foundTicket) {
             toast.success('Ticket encontrado');
+            this._storageTicket.saveTicket([foundTicket]);
+            this._router.navigate(['ticket/facturacion']);
           } else {
             toast.error('Ticket no encontrado');
           }
         },
         (error) => {
+          console.clear();
           toast.error('Error al buscar el ticket');
-          console.error(error);
         }
       );
   }

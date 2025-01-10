@@ -1,0 +1,165 @@
+<section class="bg-white">
+  <div class="container mx-auto py-8 px-4">
+    <div class="flex flex-col lg:flex-row lg:space-x-12">
+      <div class="lg:w-auto">
+        <h2 class="mb-4 text-xl font-light text-gray-900 dark:text-black">
+          Facturación
+        </h2>
+        <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+          <div class="grid gap-4 sm:grid-cols-2 sm:gap-6 lg:gap-x-32">
+            <div>
+              <label
+                for="rfc"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >RFC</label
+              >
+              <input
+                type="text"
+                id="rfc"
+                formControlName="rfc"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese el RFC"
+              />
+            </div>
+
+            <div>
+              <label
+                for="nombre"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Nombre o razón social</label
+              >
+              <input
+                type="text"
+                id="nombre"
+                formControlName="nombre"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese el nombre"
+              />
+            </div>
+
+            <div>
+              <label
+                for="direccion"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Dirección</label
+              >
+              <input
+                type="text"
+                id="direccion"
+                formControlName="direccion"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese la dirección"
+              />
+            </div>
+
+            <div>
+              <label
+                for="colonia"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Colonia</label
+              >
+              <input
+                type="text"
+                id="colonia"
+                formControlName="colonia"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese la colonia"
+              />
+            </div>
+
+            <div>
+              <label
+                for="delegacion"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Ciudad</label
+              >
+              <input
+                type="text"
+                id="delegacion"
+                formControlName="ciudad"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese la ciudad"
+              />
+            </div>
+
+            <div>
+              <label
+                for="cp"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Código Postal</label
+              >
+              <input
+                type="text"
+                id="cp"
+                formControlName="cp"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                placeholder="Ingrese el codigo postal"
+              />
+            </div>
+
+            <div>
+              <label
+                for="estado"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Estado</label
+              >
+              <select
+                id="estado"
+                formControlName="estado"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                <option value="" disabled selected>Seleccione un estado</option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="regimenFiscal"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Régimen Fiscal</label
+              >
+              <select
+                id="regimenFiscal"
+                formControlName="regimenFiscal"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                <option value="" disabled selected>
+                  Seleccione un régimen fiscal
+                </option>
+              </select>
+            </div>
+
+            <div>
+              <label
+                for="usoCfdi"
+                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+                >Uso CFDI</label
+              >
+              <select
+                id="usoCfdi"
+                formControlName="usoCfdi"
+                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+              >
+                <option value="" disabled selected>
+                  Seleccione el uso de CFDI
+                </option>
+              </select>
+            </div>
+          </div>
+
+          <button
+            type="submit"
+            class="inline-flex items-center px-28 py-2.5 mt-4 sm:mt-6 text-sm font-medium text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-orange-600"
+          >
+            Siguiente
+          </button>
+        </form>
+        @if (loading()) {
+        <p class="text-center text-xl text-orange-800">Cargando...</p>
+        }@else {
+        <app-table [tickets]="tickets()"></app-table>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.factura.model.Producto;
 import com.example.factura.model.Sucursal;
 import com.example.factura.model.Ticket;
+import com.example.factura.model.TipoPago;
 import com.example.service.ProductoService;
 import com.example.service.SucursalService;
 import com.example.service.TicketService;
@@ -70,15 +71,20 @@ public class DataSeedREST {
     private List<Producto> productos4 = Arrays.asList(producto1, producto3, producto5, producto7);
     private List<Producto> productos5 = Arrays.asList(producto2, producto4, producto6);
 
-    private Ticket ticket1 = new Ticket(date1, folio1, codigoFacturacion1, sucursal1, 6600, productos1);
-    private Ticket ticket2 = new Ticket(date2, folio2, codigoFacturacion2, sucursal2, 4000, productos2);
-    private Ticket ticket3 = new Ticket(date3, folio3, codigoFacturacion3, sucursal3, 9800, productos3);
-    private Ticket ticket4 = new Ticket(date4, folio4, codigoFacturacion4, sucursal4, 16700, productos4);
-    private Ticket ticket5 = new Ticket(date5, folio5, codigoFacturacion5, sucursal5, 3700, productos5);
+    private Ticket ticket1 = new Ticket(date1, folio1, codigoFacturacion1, sucursal1, 6600, 660, TipoPago.TARJETA,
+            productos1);
+    private Ticket ticket2 = new Ticket(date2, folio2, codigoFacturacion2, sucursal2, 4000, 400, TipoPago.EFECTIVO,
+            productos2);
+    private Ticket ticket3 = new Ticket(date3, folio3, codigoFacturacion3, sucursal3, 9800, 980, TipoPago.TARJETA,
+            productos3);
+    private Ticket ticket4 = new Ticket(date4, folio4, codigoFacturacion4, sucursal4, 16700, 1670, TipoPago.TARJETA,
+            productos4);
+    private Ticket ticket5 = new Ticket(date5, folio5, codigoFacturacion5, sucursal5, 3700, 370, TipoPago.EFECTIVO,
+            productos5);
 
     @PostMapping
     private ResponseEntity<String> saveDataSeed() {
-        
+
         return saveAllData();
     }
 

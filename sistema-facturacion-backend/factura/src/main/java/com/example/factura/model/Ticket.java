@@ -11,10 +11,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
+@Data
 @Table(name = "ticket")
 public class Ticket {
 
@@ -33,6 +36,14 @@ public class Ticket {
     private Sucursal sucursal;
 
     private double total;
+
+    private double IVA;
+
+    private TipoPago tipoPago;
+
+    @ManyToOne
+    @JoinColumn(name = "factura_id", referencedColumnName = "id")
+    private Factura factura;
 
     @ManyToMany
     @JoinTable(name = "ticket_producto", joinColumns = @JoinColumn(name = "ticket_id"), inverseJoinColumns = @JoinColumn(name = "producto_id"))
@@ -57,59 +68,15 @@ public class Ticket {
         this.productos = productos;
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
+    public Ticket(Date date, Long folio, Long codigoFacturacion, Sucursal sucursal, double total, double iVA,
+            TipoPago tipoPago, List<Producto> productos) {
         this.date = date;
-    }
-
-    public Long getFolio() {
-        return folio;
-    }
-
-    public void setFolio(Long folio) {
         this.folio = folio;
-    }
-
-    public Long getCodigoFacturacion() {
-        return codigoFacturacion;
-    }
-
-    public void setCodigoFacturacion(Long codigoFacturacion) {
         this.codigoFacturacion = codigoFacturacion;
-    }
-    
-    public Sucursal getSucursal() {
-        return sucursal;
-    }
-
-    public void setSucursal(Sucursal sucursal) {
         this.sucursal = sucursal;
-    }
-
-    public double getTotal() {
-        return total;
-    }
-
-    public void setTotal(double total) {
         this.total = total;
-    }
-
-    public List<Producto> getProductos() {
-        return productos;
-    }
-
-    public void setProductos(List<Producto> productos) {
+        IVA = iVA;
+        this.tipoPago = tipoPago;
         this.productos = productos;
     }
 
