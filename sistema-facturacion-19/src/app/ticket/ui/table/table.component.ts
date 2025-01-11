@@ -1,9 +1,10 @@
 import { Component, input } from '@angular/core';
 import { Ticket } from '../../../shared/interfaces/ticket';
+import { DateformatPipe } from './pipes/dateformat.pipe';
 
 @Component({
   selector: 'app-table',
-  imports: [],
+  imports: [DateformatPipe],
   templateUrl: './table.component.html',
   styleUrl: './table.component.css',
   standalone: true,
@@ -11,7 +12,5 @@ import { Ticket } from '../../../shared/interfaces/ticket';
 export class TableComponent {
   tickets = input.required<Ticket[]>();
 
-  constructor() {
-    console.log(this.tickets);
-  }
+  constructor() {}
 }

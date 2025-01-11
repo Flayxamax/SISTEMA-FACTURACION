@@ -1,0 +1,120 @@
+<div class="flex flex-col lg:flex-row gap-4 mt-2 mb-2">
+  <button
+    type="button"
+    class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800"
+    (click)="toggleVisibility()"
+  >
+    Agregar ticket
+    <svg
+      class="rtl:rotate-180 w-3.5 h-3.5 ms-2"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 14 10"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M1 5h12m0 0L9 1m4 4L9 9"
+      />
+    </svg>
+  </button>
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmitTicket()" class="w-full">
+    <div *ngIf="isVisible" class="flex flex-col lg:flex-row gap-4 w-full">
+      <!-- Campo de Folio -->
+      <div class="flex-grow">
+        <label
+          for="folio"
+          class="block text-sm font-light text-gray-900 dark:text-black"
+        >
+          Folio
+        </label>
+        <input
+          type="text"
+          name="folio"
+          id="folio"
+          formControlName="folio"
+          [maxlength]="15"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500 w-full"
+          placeholder="Ingrese el Folio"
+        />
+        <small
+          *ngIf="
+            ticketForm.get('folio')?.touched &&
+            ticketForm.get('folio')?.hasError('required')
+          "
+          class="text-orange-400"
+        >
+          Este campo es obligatorio
+        </small>
+      </div>
+
+      <div class="flex-grow">
+        <label
+          for="codigoFacturacion"
+          class="block text-sm font-light text-gray-900 dark:text-black"
+        >
+          Código de facturación
+        </label>
+        <input
+          type="text"
+          name="codigoFacturacion"
+          id="codigoFacturacion"
+          formControlName="codigoFacturacion"
+          [maxlength]="15"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500 w-full"
+          placeholder="Ingrese el código de facturación"
+        />
+        <small
+          *ngIf="
+            ticketForm.get('codigoFacturacion')?.touched &&
+            ticketForm.get('codigoFacturacion')?.hasError('required')
+          "
+          class="text-orange-400"
+        >
+          Este campo es obligatorio
+        </small>
+      </div>
+
+      <div class="flex-grow relative">
+        <label
+          for="sucursal"
+          class="block text-sm font-light text-gray-900 dark:text-black"
+        >
+          Sucursal
+        </label>
+        <select
+          id="sucursal"
+          formControlName="sucursal"
+          class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500 relative z-10"
+        >
+          <option value="" disabled selected>Seleccione una sucursal</option>
+          <option *ngFor="let sucursal of sucursales" [value]="sucursal.id">
+            {{ sucursal.nombre }}
+          </option>
+        </select>
+        <small
+          *ngIf="
+            ticketForm.get('sucursal')?.touched &&
+            ticketForm.get('sucursal')?.hasError('required')
+          "
+          class="text-orange-400"
+        >
+          Este campo es obligatorio
+        </small>
+      </div>
+
+      <div class="flex-shrink-0 lg:ml-auto">
+        <button
+          type="submit"
+          class="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-orange-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-800 w-full lg:w-auto my-4"
+        >
+          Añadir
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

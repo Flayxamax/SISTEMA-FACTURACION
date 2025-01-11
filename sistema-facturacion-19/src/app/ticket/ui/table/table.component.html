@@ -1,11 +1,9 @@
-<script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
-
 <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-4">
   <table
     class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400"
   >
     <thead
-      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400"
+      class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-800 dark:text-gray-200"
     >
       <tr>
         <th scope="col" class="px-6 py-3">Folio</th>
@@ -22,7 +20,7 @@
     @for (ticket of tickets(); track ticket.id) {
     <tbody>
       <tr
-        class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+        class="bg-white border-b dark:bg-gray-700 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
       >
         <th
           scope="row"
@@ -30,27 +28,33 @@
         >
           {{ ticket.folio }}
         </th>
-        <td class="px-6 py-4">{{ ticket.codigoFacturacion }}</td>
-        <td class="px-6 py-4">{{ ticket.date }}</td>
-        <td class="px-6 py-4">{{ ticket.sucursal.nombre }}</td>
-        <td class="px-6 py-4">
+        <td class="px-6 py-4 dark:text-white">
+          {{ ticket.codigoFacturacion }}
+        </td>
+        <td class="px-6 py-4 dark:text-white">
+          {{ ticket.date | dateformat }}
+        </td>
+        <td class="px-6 py-4 dark:text-white">{{ ticket.sucursal.nombre }}</td>
+        <td class="px-6 py-4 dark:text-white">
           <ul>
             @for (producto of ticket.productos; track producto.id) {
             <li>{{ producto.nombre }}</li>
             }
           </ul>
         </td>
-        <td class="px-6 py-4">{{ ticket.total }}</td>
-        <td class="px-6 py-4">{{ ticket.iva }}</td>
-        <td class="px-6 py-4">{{ ticket.total + ticket.iva }}</td>
-        <td class="px-6 py-4">{{ ticket.tipoPago }}</td>
+        <td class="px-6 py-4 dark:text-white">{{ ticket.total }}</td>
+        <td class="px-6 py-4 dark:text-white">{{ ticket.iva }}</td>
+        <td class="px-6 py-4 dark:text-white">
+          {{ ticket.total + ticket.iva }}
+        </td>
+        <td class="px-6 py-4 dark:text-white">{{ ticket.tipoPago }}</td>
       </tr>
     </tbody>
     } @empty {
     <tr
       class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
     >
-      <td colspan="5" class="px-6 py-4 text-center">
+      <td colspan="9" class="px-6 py-4 text-center">
         Error: No se encontraron tickets
       </td>
     </tr>

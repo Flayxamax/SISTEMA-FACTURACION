@@ -46,6 +46,7 @@ export default class TicketFormComponent {
   });
 
   constructor() {
+    this._storageTicket.deleteTickets();
     this._sucursalService.getAllSucursal().subscribe(
       (sucursales) => {
         this.sucursales = sucursales;
@@ -54,6 +55,7 @@ export default class TicketFormComponent {
         console.error(error);
       }
     );
+    this._ticketService.loadTickets();
   }
 
   async onSubmit() {
@@ -76,7 +78,7 @@ export default class TicketFormComponent {
         (foundTicket: Ticket) => {
           if (foundTicket) {
             toast.success('Ticket encontrado');
-            this._storageTicket.saveTicket([foundTicket]);
+            this._ticketService.addTicket(foundTicket);
             this._router.navigate(['ticket/facturacion']);
           } else {
             toast.error('Ticket no encontrado');
