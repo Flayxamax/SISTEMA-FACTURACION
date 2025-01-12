@@ -1,0 +1,26 @@
+INSERT INTO public.regimen_fiscal (id, clave, descripcion)
+VALUES
+    (1, '601', 'General de Ley Personas Morales'),
+    (2, '603', 'Personas Morales con Fines no Lucrativos'),
+    (3, '605', 'Sueldos y Salarios e Ingresos Asimilados a Salarios'),
+    (4, '606', 'Arrendamiento'),
+    (5, '607', 'Régimen de Enajenación o Adquisición de Bienes'),
+    (6, '608', 'Demás ingresos'),
+    (7, '609', 'Consolidación'),
+    (8, '610', 'Residentes en el Extranjero sin Establecimiento Permanente en México'),
+    (9, '611', 'Ingresos por Dividendos (socios y accionistas)'),
+    (10, '612', 'Personas Físicas con Actividades Empresariales y Profesionales'),
+    (11, '614', 'Ingresos por intereses'),
+    (12, '615', 'Régimen de los ingresos por obtención de premios'),
+    (13, '616', 'Sin obligaciones fiscales'),
+    (14, '620', 'Sociedades Cooperativas de Producción que optan por diferir sus ingresos'),
+    (15, '621', 'Incorporación Fiscal'),
+    (16, '622', 'Actividades Agrícolas, Ganaderas, Silvícolas y Pesqueras'),
+    (17, '623', 'Opcional para Grupos de Sociedades'),
+    (18, '624', 'Coordinados'),
+    (19, '625', 'Régimen de las Actividades Empresariales con ingresos a través de Plataformas Tecnológicas'),
+    (20, '626', 'Régimen Simplificado de Confianza'),
+    (21, '628', 'Hidrocarburos'),
+    (22, '629', 'De los Regímenes Fiscales Preferentes y de las Empresas Multinacionales'),
+    (23, '630', 'Enajenación de acciones en bolsa de valores')
+ON CONFLICT (id) DO NOTHING;

@@ -1,0 +1,27 @@
+INSERT INTO public.uso_cfdi (id, clave, descripcion)
+VALUES
+    (1, 'G01', 'Adquisición de mercancías'),
+    (2, 'G02', 'Devoluciones, descuentos o bonificaciones'),
+    (3, 'G03', 'Gastos en general'),
+    (4, 'I01', 'Construcciones'),
+    (5, 'I02', 'Mobiliario y equipo de oficina para inversiones'),
+    (6, 'I03', 'Equipo de transporte'),
+    (7, 'I04', 'Equipo de cómputo y accesorios'),
+    (8, 'I05', 'Dados, troqueles, moldes, matrices y herramental'),
+    (9, 'I06', 'Comunicaciones telefónicas'),
+    (10, 'I07', 'Comunicaciones satelitales'),
+    (11, 'I08', 'Otra maquinaria y equipo'),
+    (12, 'D01', 'Honorarios médicos, dentales y hospitalarios'),
+    (13, 'D02', 'Gastos médicos por incapacidad o discapacidad'),
+    (14, 'D03', 'Gastos funerales'),
+    (15, 'D04', 'Donativos'),
+    (16, 'D05', 'Intereses reales pagados por créditos hipotecarios'),
+    (17, 'D06', 'Aportaciones voluntarias al SAR'),
+    (18, 'D07', 'Primas de seguros de gastos médicos'),
+    (19, 'D08', 'Gastos de transportación escolar obligatoria'),
+    (20, 'D09', 'Depósitos en cuentas para el ahorro, primas de pensiones'),
+    (21, 'D10', 'Pagos por servicios educativos (colegiaturas)'),
+    (22, 'S01', 'Sin efectos fiscales'),
+    (23, 'CP01', 'Pagos'),
+    (24, 'CN01', 'Nómina')
+ON CONFLICT (id) DO NOTHING;
