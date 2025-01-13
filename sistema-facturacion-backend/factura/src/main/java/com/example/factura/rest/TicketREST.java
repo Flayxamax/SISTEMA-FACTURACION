@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
+import com.example.factura.exception.RequestException;
 import com.example.factura.model.Ticket;
 import com.example.service.TicketService;
 
@@ -20,12 +21,17 @@ public class TicketREST {
 
     @GetMapping("/{id}")
     private ResponseEntity<Ticket> getTicket(@PathVariable("id") String id) {
-        Ticket ticket = ticketService.getById(Long.parseLong(id));
-        if (ticket != null) {
-            return ResponseEntity.ok(ticket);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
-
+        try {
+            Ticket ticket = ticketService.getById(Long.parseLong(id));
+            if (ticket != null) {
+                return ResponseEntity.ok(ticket);
+            } else {
+                throw new RequestException("T-102", "Ticket no encontrado");
+            }
+        } catch (RequestException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RequestException("T-101", "Error al obtener el ticket");
         }
     }
 
@@ -33,12 +39,18 @@ public class TicketREST {
     private ResponseEntity<Ticket> getTicketByParams(@PathVariable("folio") String folio,
             @PathVariable("codigoFacturacion") String codigoFacturacion,
             @PathVariable("sucursal_id") String sucursal_id) {
-        Ticket ticket = ticketService.getByAttributes(Long.parseLong(folio), Long.parseLong(codigoFacturacion),
-                Long.parseLong(sucursal_id));
-        if (ticket != null) {
-            return ResponseEntity.ok(ticket);
-        } else {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        try {
+            Ticket ticket = ticketService.getByAttributes(Long.parseLong(folio), Long.parseLong(codigoFacturacion),
+                    Long.parseLong(sucursal_id));
+            if (ticket != null) {
+                return ResponseEntity.ok(ticket);
+            } else {
+                throw new RequestException("T-102", "Ticket no encontrado");
+            }
+        } catch (RequestException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new RequestException("T-101", "Error al obtener el ticket");
         }
     }
 

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.factura.exception.RequestException;
 import com.example.factura.model.RegimenFiscal;
 import com.example.service.RegimenService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +23,14 @@ public class RegimenREST {
     private ResponseEntity<List<RegimenFiscal>> getAllRegimenes() {
         try {
             List<RegimenFiscal> regimenes = regimenService.findAll();
+            if (regimenes.isEmpty()) {
+                throw new RequestException("R-102", "No hay regimenes disponibles");
+            }
             return ResponseEntity.ok(regimenes);
+        } catch (RequestException e) {
+            throw e;
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            throw new RequestException("R-101", "Error al obtener los regimenes");
         }
     }
 }

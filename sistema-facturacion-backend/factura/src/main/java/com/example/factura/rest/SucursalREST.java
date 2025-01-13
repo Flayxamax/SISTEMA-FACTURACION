@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.factura.exception.RequestException;
 import com.example.factura.model.Sucursal;
 import com.example.service.SucursalService;
 
@@ -23,9 +24,14 @@ public class SucursalREST {
     private ResponseEntity<List<Sucursal>> getAllSucursales() {
         try {
             List<Sucursal> sucursales = sucursalService.findAll();
+            if (sucursales.isEmpty()) {
+                throw new RequestException("S-102", "No hay sucursales disponibles");
+            }
             return ResponseEntity.ok(sucursales);
+        } catch (RequestException e) {
+            throw e;
         } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+            throw new RequestException("S-101", "Error al obtener las sucursales");
         }
     }
 

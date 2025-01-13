@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.factura.exception.RequestException;
 import com.example.factura.model.UsoCFDI;
 import com.example.service.UsoCFDIService;
 
@@ -22,9 +23,14 @@ public class UsoCFDIREST {
     private ResponseEntity<List<UsoCFDI>> getAllUsosCFDI() {
         try {
             List<UsoCFDI> usosCFDI = usocfdiService.findAll();
+            if (usosCFDI.isEmpty()) {
+                throw new RequestException("U-102", "No hay usos CFDI disponibles");
+            }
             return ResponseEntity.ok(usosCFDI);
+        } catch (RequestException e) {
+            throw e;
         } catch (Exception e) {
-            return ResponseEntity.badRequest().build();
+            throw new RequestException("U-101", "Error al obtener los usos CFDI");
         }
     }
 }
