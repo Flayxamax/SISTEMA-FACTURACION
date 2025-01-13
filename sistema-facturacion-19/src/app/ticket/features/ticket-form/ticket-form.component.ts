@@ -63,13 +63,11 @@ export default class TicketFormComponent {
           toast.success('Ticket encontrado');
           this._ticketService.addTicket(foundTicket);
           this._router.navigate(['ticket/facturacion']);
-        } else {
-          toast.error('Ticket no encontrado');
         }
       },
       (error) => {
         console.clear();
-        toast.error('Error al buscar el ticket');
+        toast.error(error);
       }
     );
   }
