@@ -14,9 +14,7 @@ export class StorageTicketService {
     }
 
     newTickets.forEach((newTicket) => {
-      if (
-        existingTickets.some((ticket: Ticket) => ticket.id === newTicket.id)
-      ) {
+      if (existingTickets.some((ticket: Ticket) => ticket.id === newTicket.id)) {
         throw new Error(`Ticket with id ${newTicket.id} already exists.`);
       }
     });

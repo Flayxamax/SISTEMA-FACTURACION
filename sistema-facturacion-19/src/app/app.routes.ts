@@ -8,8 +8,7 @@ export const routes: Routes = [
   },
   {
     path: 'ticket',
-    loadChildren: () =>
-      import('./factura/features/factura-shell/factura.routes'),
+    loadChildren: () => import('./factura/features/factura-shell/factura.routes'),
   },
   {
     path: '**',

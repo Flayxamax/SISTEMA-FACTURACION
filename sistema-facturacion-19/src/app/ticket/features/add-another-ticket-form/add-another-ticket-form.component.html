@@ -26,12 +26,7 @@
     <div *ngIf="isVisible" class="flex flex-col lg:flex-row gap-4 w-full">
       <!-- Campo de Folio -->
       <div class="flex-grow">
-        <label
-          for="folio"
-          class="block text-sm font-light text-gray-900 dark:text-black"
-        >
-          Folio
-        </label>
+        <label for="folio" class="block text-sm font-light text-gray-900 dark:text-black"> Folio </label>
         <input
           type="text"
           name="folio"
@@ -42,10 +37,7 @@
           placeholder="Ingrese el Folio"
         />
         <small
-          *ngIf="
-            ticketForm.get('folio')?.touched &&
-            ticketForm.get('folio')?.hasError('required')
-          "
+          *ngIf="ticketForm.get('folio')?.touched && ticketForm.get('folio')?.hasError('required')"
           class="text-orange-400"
         >
           Este campo es obligatorio
@@ -53,10 +45,7 @@
       </div>
 
       <div class="flex-grow">
-        <label
-          for="codigoFacturacion"
-          class="block text-sm font-light text-gray-900 dark:text-black"
-        >
+        <label for="codigoFacturacion" class="block text-sm font-light text-gray-900 dark:text-black">
           Código de facturación
         </label>
         <input
@@ -70,8 +59,7 @@
         />
         <small
           *ngIf="
-            ticketForm.get('codigoFacturacion')?.touched &&
-            ticketForm.get('codigoFacturacion')?.hasError('required')
+            ticketForm.get('codigoFacturacion')?.touched && ticketForm.get('codigoFacturacion')?.hasError('required')
           "
           class="text-orange-400"
         >
@@ -80,12 +68,7 @@
       </div>
 
       <div class="flex-grow relative">
-        <label
-          for="sucursal"
-          class="block text-sm font-light text-gray-900 dark:text-black"
-        >
-          Sucursal
-        </label>
+        <label for="sucursal" class="block text-sm font-light text-gray-900 dark:text-black"> Sucursal </label>
         <select
           id="sucursal"
           formControlName="sucursal"
@@ -97,10 +80,7 @@
           </option>
         </select>
         <small
-          *ngIf="
-            ticketForm.get('sucursal')?.touched &&
-            ticketForm.get('sucursal')?.hasError('required')
-          "
+          *ngIf="ticketForm.get('sucursal')?.touched && ticketForm.get('sucursal')?.hasError('required')"
           class="text-orange-400"
         >
           Este campo es obligatorio

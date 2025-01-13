@@ -5,10 +5,7 @@ import { Ticket } from '../../shared/interfaces/ticket';
 import { StorageTicketService } from '../../shared/data-access/storage-ticket.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-export type TicketDTO = Omit<
-  Ticket,
-  'id' | 'date' | 'total' | 'iva' | 'tipoPago' | 'factura' | 'productos'
->;
+export type TicketDTO = Omit<Ticket, 'id' | 'date' | 'total' | 'iva' | 'tipoPago' | 'factura' | 'productos'>;
 
 @Injectable({
   providedIn: 'root',
@@ -22,11 +19,7 @@ export class TicketService extends BaseHttpService {
     return this._http.get<Ticket>(`${this._apiUrl}/ticket/${id}`);
   }
 
-  getTicketByParams(
-    folio: number,
-    codigoFacturacion: number,
-    sucursal_id: number
-  ): Observable<Ticket> {
+  getTicketByParams(folio: number, codigoFacturacion: number, sucursal_id: number): Observable<Ticket> {
     return this._http.get<Ticket>(
       `${this._apiUrl}/ticket/folio/${folio}/codigoFacturacion/${codigoFacturacion}/sucursal/${sucursal_id}`
     );

@@ -1,8 +1,5 @@
 import { Component, effect, inject, Input, input, signal } from '@angular/core';
-import {
-  TicketDTO,
-  TicketService,
-} from '../../../ticket/data-access/ticket.service';
+import { TicketDTO, TicketService } from '../../../ticket/data-access/ticket.service';
 import { Ticket } from '../../../shared/interfaces/ticket';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { isRequired } from '../../utils/validators';
@@ -17,12 +14,7 @@ import { AddAnotherTicketFormComponent } from '../../../ticket/features/add-anot
 
 @Component({
   selector: 'app-factura-form',
-  imports: [
-    ReactiveFormsModule,
-    TableComponent,
-    CommonModule,
-    AddAnotherTicketFormComponent,
-  ],
+  imports: [ReactiveFormsModule, TableComponent, CommonModule, AddAnotherTicketFormComponent],
   templateUrl: './factura-form.component.html',
   styleUrl: './factura-form.component.css',
 })
@@ -36,10 +28,7 @@ export default class FacturaFormComponent {
   loading = this._ticketService.loading;
 
   facturaForm = this._formBuilder.group({
-    rfc: this._formBuilder.control('', [
-      Validators.required,
-      Validators.pattern('^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$'),
-    ]),
+    rfc: this._formBuilder.control('', [Validators.required, Validators.pattern('^[A-Z]{4}[0-9]{6}[A-Z0-9]{3}$')]),
     nombre: this._formBuilder.control('', Validators.required),
     direccion: this._formBuilder.control('', Validators.required),
     colonia: this._formBuilder.control('', Validators.required),

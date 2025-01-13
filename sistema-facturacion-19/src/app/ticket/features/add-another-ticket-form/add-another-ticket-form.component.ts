@@ -30,14 +30,8 @@ export class AddAnotherTicketFormComponent {
   }
   sucursales: Sucursal[] = [];
   ticketForm = this._formBuilder.group({
-    folio: this._formBuilder.control('', [
-      Validators.required,
-      Validators.pattern('^[0-9]*$'),
-    ]),
-    codigoFacturacion: this._formBuilder.control('', [
-      Validators.required,
-      Validators.pattern('^[0-9]*$'),
-    ]),
+    folio: this._formBuilder.control('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+    codigoFacturacion: this._formBuilder.control('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     sucursal: this._formBuilder.control('', Validators.required),
   });
 
@@ -55,34 +49,26 @@ export class AddAnotherTicketFormComponent {
       sucursal: { id: Number(sucursal) || 0 } as Sucursal,
     };
 
-    this._ticketService
-      .getTicketByParams(
-        ticket.folio,
-        ticket.codigoFacturacion,
-        ticket.sucursal.id
-      )
-      .subscribe(
-        (foundTicket: Ticket) => {
-          if (foundTicket) {
-            const isDuplicate = this.tickets().some(
-              (t) => t.id === foundTicket.id
-            );
-            if (isDuplicate) {
-              toast.error('El ticket ya ha sido agregado');
-            } else {
-              toast.success('Ticket Agregado');
-              this._storageTicket.saveTicket([foundTicket]);
-              this._ticketService.addTicket(foundTicket);
-            }
+    this._ticketService.getTicketByParams(ticket.folio, ticket.codigoFacturacion, ticket.sucursal.id).subscribe(
+      (foundTicket: Ticket) => {
+        if (foundTicket) {
+          const isDuplicate = this.tickets().some((t) => t.id === foundTicket.id);
+          if (isDuplicate) {
+            toast.error('El ticket ya ha sido agregado');
           } else {
-            toast.error('Ticket no encontrado');
+            toast.success('Ticket Agregado');
+            this._storageTicket.saveTicket([foundTicket]);
+            this._ticketService.addTicket(foundTicket);
           }
-        },
-        (error) => {
-          console.clear();
-          toast.error('Error al buscar el ticket');
+        } else {
+          toast.error('Ticket no encontrado');
         }
-      );
+      },
+      (error) => {
+        console.clear();
+        toast.error('Error al buscar el ticket');
+      }
+    );
   }
 
   constructor() {

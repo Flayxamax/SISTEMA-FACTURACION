@@ -1,2 +1,1 @@
-export interface Factura {
-}
+export interface Factura {}

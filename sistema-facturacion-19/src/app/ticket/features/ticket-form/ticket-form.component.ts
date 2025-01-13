@@ -1,10 +1,5 @@
 import { Component, inject } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SucursalService } from '../../../shared/data-access/sucursal.service';
 import { Sucursal } from '../../../shared/interfaces/sucursal';
 import { TicketDTO, TicketService } from '../../data-access/ticket.service';
@@ -34,14 +29,8 @@ export default class TicketFormComponent {
   sucursales: Sucursal[] = [];
 
   ticketForm = this._formBuilder.group({
-    folio: this._formBuilder.control('', [
-      Validators.required,
-      Validators.pattern('^[0-9]*$'),
-    ]),
-    codigoFacturacion: this._formBuilder.control('', [
-      Validators.required,
-      Validators.pattern('^[0-9]*$'),
-    ]),
+    folio: this._formBuilder.control('', [Validators.required, Validators.pattern('^[0-9]*$')]),
+    codigoFacturacion: this._formBuilder.control('', [Validators.required, Validators.pattern('^[0-9]*$')]),
     sucursal: this._formBuilder.control('', Validators.required),
   });
 
@@ -52,7 +41,7 @@ export default class TicketFormComponent {
         this.sucursales = sucursales;
       },
       (error) => {
-        console.error(error);
+        toast.error(error);
       }
     );
     this._ticketService.loadTickets();
@@ -68,26 +57,20 @@ export default class TicketFormComponent {
       sucursal: { id: Number(sucursal) || 0 } as Sucursal,
     };
 
-    this._ticketService
-      .getTicketByParams(
-        ticket.folio,
-        ticket.codigoFacturacion,
-        ticket.sucursal.id
-      )
-      .subscribe(
-        (foundTicket: Ticket) => {
-          if (foundTicket) {
-            toast.success('Ticket encontrado');
-            this._ticketService.addTicket(foundTicket);
-            this._router.navigate(['ticket/facturacion']);
-          } else {
-            toast.error('Ticket no encontrado');
-          }
-        },
-        (error) => {
-          console.clear();
-          toast.error('Error al buscar el ticket');
+    this._ticketService.getTicketByParams(ticket.folio, ticket.codigoFacturacion, ticket.sucursal.id).subscribe(
+      (foundTicket: Ticket) => {
+        if (foundTicket) {
+          toast.success('Ticket encontrado');
+          this._ticketService.addTicket(foundTicket);
+          this._router.navigate(['ticket/facturacion']);
+        } else {
+          toast.error('Ticket no encontrado');
         }
-      );
+      },
+      (error) => {
+        console.clear();
+        toast.error('Error al buscar el ticket');
+      }
+    );
   }
 }

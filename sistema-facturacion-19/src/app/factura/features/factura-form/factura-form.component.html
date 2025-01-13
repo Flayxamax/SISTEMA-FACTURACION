@@ -25,14 +25,10 @@
                     />
                   </svg>
                 </div>
-                <div
-                  class="flex w-full bg-gray-200 h-1 dark:bg-orange-400"
-                ></div>
+                <div class="flex w-full bg-gray-200 h-1 dark:bg-orange-400"></div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-orange-500">
-                  Verificar ticket
-                </h3>
+                <h3 class="font-bold text-gray-900 dark:text-orange-500">Verificar ticket</h3>
               </div>
             </li>
             <li class="relative w-full mb-6">
@@ -55,9 +51,7 @@
                 <div class="flex w-full bg-gray-200 h-1 dark:bg-gray-700"></div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-orange-400">
-                  Ingresar datos
-                </h3>
+                <h3 class="font-bold text-gray-900 dark:text-orange-400">Ingresar datos</h3>
               </div>
             </li>
             <li class="relative w-full mb-6">
@@ -79,31 +73,21 @@
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M14 3v4a1 1 0 0 0 1 1h4" />
-                    <path
-                      d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3"
-                    />
+                    <path d="M11.5 21h-4.5a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v5m-5 6h7m-3 -3l3 3l-3 3" />
                   </svg>
                 </div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-gray-500">
-                  Generar factura
-                </h3>
+                <h3 class="font-bold text-gray-900 dark:text-gray-500">Generar factura</h3>
               </div>
             </li>
           </ol>
         </div>
-        <h2 class="mb-4 text-xl font-light text-gray-900 dark:text-black">
-          Facturación
-        </h2>
+        <h2 class="mb-4 text-xl font-light text-gray-900 dark:text-black">Facturación</h2>
         <form [formGroup]="facturaForm" (ngSubmit)="onSubmit()">
           <div class="grid gap-4 sm:grid-cols-3 sm:gap-6 lg:gap-x-12">
             <div>
-              <label
-                for="rfc"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >RFC</label
-              >
+              <label for="rfc" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">RFC</label>
               <input
                 type="text"
                 id="rfc"
@@ -114,9 +98,7 @@
             </div>
 
             <div>
-              <label
-                for="nombre"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+              <label for="nombre" class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
                 >Nombre o razón social</label
               >
               <input
@@ -129,9 +111,7 @@
             </div>
 
             <div>
-              <label
-                for="direccion"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+              <label for="direccion" class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
                 >Dirección</label
               >
               <input
@@ -144,11 +124,7 @@
             </div>
 
             <div>
-              <label
-                for="colonia"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >Colonia</label
-              >
+              <label for="colonia" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Colonia</label>
               <input
                 type="text"
                 id="colonia"
@@ -159,11 +135,7 @@
             </div>
 
             <div>
-              <label
-                for="delegacion"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >Ciudad</label
-              >
+              <label for="delegacion" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Ciudad</label>
               <input
                 type="text"
                 id="delegacion"
@@ -174,11 +146,7 @@
             </div>
 
             <div>
-              <label
-                for="cp"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >Código Postal</label
-              >
+              <label for="cp" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Código Postal</label>
               <input
                 type="text"
                 id="cp"
@@ -189,11 +157,7 @@
             </div>
 
             <div>
-              <label
-                for="estado"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >Estado</label
-              >
+              <label for="estado" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Estado</label>
               <select
                 id="estado"
                 formControlName="estado"
@@ -204,9 +168,7 @@
             </div>
 
             <div>
-              <label
-                for="regimenFiscal"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
+              <label for="regimenFiscal" class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
                 >Régimen Fiscal</label
               >
               <select
@@ -214,26 +176,18 @@
                 formControlName="regimenFiscal"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option value="" disabled selected>
-                  Seleccione un régimen fiscal
-                </option>
+                <option value="" disabled selected>Seleccione un régimen fiscal</option>
               </select>
             </div>
 
             <div>
-              <label
-                for="usoCfdi"
-                class="block mb-2 text-sm font-light text-gray-900 dark:text-black"
-                >Uso CFDI</label
-              >
+              <label for="usoCfdi" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Uso CFDI</label>
               <select
                 id="usoCfdi"
                 formControlName="usoCfdi"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
               >
-                <option value="" disabled selected>
-                  Seleccione el uso de CFDI
-                </option>
+                <option value="" disabled selected>Seleccione el uso de CFDI</option>
               </select>
             </div>
           </div>
@@ -248,9 +202,9 @@
           </div>
         </form>
         @if (loading()) {
-        <p class="text-center text-xl text-orange-800">Cargando...</p>
+          <p class="text-center text-xl text-orange-800">Cargando...</p>
         } @else {
-        <app-table [tickets]="tickets()"></app-table>
+          <app-table [tickets]="tickets()"></app-table>
         }
         <app-add-another-ticket-form></app-add-another-ticket-form>
       </div>
