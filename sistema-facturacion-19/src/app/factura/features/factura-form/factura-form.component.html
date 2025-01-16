@@ -91,10 +91,16 @@
               <input
                 type="text"
                 id="rfc"
+                (input)="transformToUpperCase($event)"
+                onkeypress="return /[A-Z0-9]/i.test(event.key)"
+                [maxlength]="13"
                 formControlName="rfc"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese el RFC"
               />
+              @if (isRequired('rfc')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -104,10 +110,15 @@
               <input
                 type="text"
                 id="nombre"
+                onkeypress="return /[A-Za-z0-9 .]/.test(event.key)"
+                [maxlength]="100"
                 formControlName="nombre"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese el nombre"
               />
+              @if (isRequired('nombre')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -117,10 +128,15 @@
               <input
                 type="text"
                 id="direccion"
+                onkeypress="return /[A-Za-z0-9 .,#]/.test(event.key)"
+                [maxlength]="50"
                 formControlName="direccion"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese la dirección"
               />
+              @if (isRequired('direccion')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -128,21 +144,31 @@
               <input
                 type="text"
                 id="colonia"
+                onkeypress="return /[A-Za-z0-9 .,#]/.test(event.key)"
+                [maxlength]="50"
                 formControlName="colonia"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese la colonia"
               />
+              @if (isRequired('colonia')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
-              <label for="delegacion" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Ciudad</label>
+              <label for="ciudad" class="block mb-2 text-sm font-light text-gray-900 dark:text-black">Ciudad</label>
               <input
                 type="text"
-                id="delegacion"
+                id="ciudad"
+                onkeypress="return /[A-Za-z0-9 .,#]/.test(event.key)"
+                [maxlength]="50"
                 formControlName="ciudad"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese la ciudad"
               />
+              @if (isRequired('ciudad')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -150,10 +176,15 @@
               <input
                 type="text"
                 id="cp"
+                onkeypress="return /[0-9]/.test(event.key)"
+                [maxlength]="5"
                 formControlName="cp"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
                 placeholder="Ingrese el codigo postal"
               />
+              @if (isRequired('cp')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -168,6 +199,9 @@
                   <option [value]="estado.id">{{ estado.nombre }}</option>
                 }
               </select>
+              @if (isRequired('estado')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -184,6 +218,9 @@
                   <option [value]="regimen.id">{{ regimen.clave + ' - ' + regimen.descripcion }}</option>
                 }
               </select>
+              @if (isRequired('regimenFiscal')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
 
             <div>
@@ -198,6 +235,9 @@
                   <option [value]="usocfdi.id">{{ usocfdi.clave + ' - ' + usocfdi.descripcion }}</option>
                 }
               </select>
+              @if (isRequired('usoCfdi')) {
+                <small class="text-orange-400">Este campo es obligatorio</small>
+              }
             </div>
           </div>
 

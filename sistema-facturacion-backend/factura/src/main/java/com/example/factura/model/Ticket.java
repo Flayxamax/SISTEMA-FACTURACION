@@ -3,7 +3,8 @@ package com.example.factura.model;
 import java.util.Date;
 import java.util.List;
 
-import jakarta.persistence.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -31,18 +32,19 @@ public class Ticket {
 
     private Long codigoFacturacion;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne
     @JoinColumn(name = "sucursal_id", referencedColumnName = "id")
     private Sucursal sucursal;
 
     private double total;
 
-    private double IVA;
+    private double subTotal;
 
     private TipoPago tipoPago;
 
     @ManyToOne
     @JoinColumn(name = "factura_id", referencedColumnName = "id")
+    @JsonIgnore
     private Factura factura;
 
     @ManyToMany
@@ -68,16 +70,15 @@ public class Ticket {
         this.productos = productos;
     }
 
-    public Ticket(Date date, Long folio, Long codigoFacturacion, Sucursal sucursal, double total, double iVA,
+    public Ticket(Date date, Long folio, Long codigoFacturacion, Sucursal sucursal, double total, double subTotal,
             TipoPago tipoPago, List<Producto> productos) {
         this.date = date;
         this.folio = folio;
         this.codigoFacturacion = codigoFacturacion;
         this.sucursal = sucursal;
         this.total = total;
-        IVA = iVA;
+        this.subTotal = subTotal;
         this.tipoPago = tipoPago;
         this.productos = productos;
     }
-
 }

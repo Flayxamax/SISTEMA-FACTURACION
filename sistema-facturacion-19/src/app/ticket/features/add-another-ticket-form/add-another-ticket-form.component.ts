@@ -59,6 +59,7 @@ export class AddAnotherTicketFormComponent {
             toast.success('Ticket Agregado');
             this._storageTicket.saveTicket([foundTicket]);
             this._ticketService.addTicket(foundTicket);
+            this.ticketForm.setValue({ folio: '', codigoFacturacion: '', sucursal: '' });
           }
         }
       },

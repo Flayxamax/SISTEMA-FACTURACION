@@ -1,7 +1,6 @@
 package com.example.factura.rest;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -43,7 +42,11 @@ public class TicketREST {
             Ticket ticket = ticketService.getByAttributes(Long.parseLong(folio), Long.parseLong(codigoFacturacion),
                     Long.parseLong(sucursal_id));
             if (ticket != null) {
-                return ResponseEntity.ok(ticket);
+                if (ticket.getFactura() == null) {
+                    return ResponseEntity.ok(ticket);
+                } else {
+                    throw new RequestException("T-103", "Ticket ya facturado");
+                }
             } else {
                 throw new RequestException("T-102", "Ticket no encontrado");
             }

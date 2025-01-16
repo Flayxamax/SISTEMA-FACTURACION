@@ -11,5 +11,5 @@ export interface Ticket {
   tipoPago: string;
   factura: any;
   productos: Producto[];
-  iva: number;
+  subTotal: number;
 }
