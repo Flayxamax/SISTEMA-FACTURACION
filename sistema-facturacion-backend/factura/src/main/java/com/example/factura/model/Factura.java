@@ -13,6 +13,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 
 @Entity
@@ -24,51 +25,47 @@ public class Factura {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @NotBlank(message = "El campo RFC no puede estar vacío")
+    @NotBlank(message = "El campo RFC no puede estar vacio")
     private String rfc;
 
-    @NotBlank(message = "El campo nombre no puede estar vacío")
+    @NotBlank(message = "El campo nombre no puede estar vacio")
     private String nombre;
 
-    @NotBlank(message = "El campo dirección no puede estar vacío")
+    @NotBlank(message = "El campo direccion no puede estar vacio")
     private String direccion;
 
-    @NotBlank(message = "El campo colonia no puede estar vacío")
+    @NotBlank(message = "El campo colonia no puede estar vacio")
     private String colonia;
 
-    @NotBlank(message = "El campo ciudad no puede estar vacío")
+    @NotBlank(message = "El campo ciudad no puede estar vacio")
     private String ciudad;
 
-    @NotBlank(message = "El campo estado no puede estar vacío")
+    @NotBlank(message = "El campo estado no puede estar vacio")
     private String estado;
 
-    @NotBlank(message = "El campo código postal no puede estar vacío")
+    @NotBlank(message = "El campo codigo postal no puede estar vacio")
     private String codigoPostal;
 
     @ManyToOne
     @JoinColumn(name = "regimen_fiscal_id", referencedColumnName = "id")
-    @NotBlank(message = "El campo régimen fiscal no puede estar vacío")
+    @NotNull(message = "El campo regimen fiscal no puede estar vacio")
     private RegimenFiscal regimenFiscal;
 
     @ManyToOne
     @JoinColumn(name = "uso_cfdi_id", referencedColumnName = "id")
-    @NotBlank(message = "El campo uso CFDI no puede estar vacío")
+    @NotNull(message = "El campo uso CFDI no puede estar vacio")
     private UsoCFDI usoCFDI;
 
-    @NotBlank(message = "El campo subtotal no puede estar vacío")
     private double subTotal;
 
-    @NotBlank(message = "El campo total no puede estar vacío")
     private double total;
 
-    @NotBlank(message = "El campo fechaEmisión no puede estar vacío")
     private Date fechaEmision;
 
-    @NotBlank(message = "El campo fechaEmisiónCertificado no puede estar vacío")
     private Date fechaEmisionCertificado;
 
     @OneToMany(mappedBy = "factura")
-    @NotEmpty(message = "El campo tickets no puede estar vacío")
+    @NotEmpty(message = "El campo tickets no puede estar vacio")
     private List<Ticket> tickets;
 
 }

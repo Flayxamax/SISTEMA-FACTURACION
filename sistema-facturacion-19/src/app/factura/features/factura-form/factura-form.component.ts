@@ -106,8 +106,7 @@ export default class FacturaFormComponent {
       this._ticketService.loadTickets();
       this._router.navigate(['ticket/facturacion/', token]);
     } catch (error: any) {
-      const errorMessage = error.error?.message || 'Error al generar factura. Por favor, inténtelo de nuevo.';
-      toast.error(errorMessage);
+      toast.error(error);
     }
   }
 

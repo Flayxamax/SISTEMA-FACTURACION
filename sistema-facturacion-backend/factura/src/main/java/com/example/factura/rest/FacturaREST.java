@@ -54,7 +54,7 @@ public class FacturaREST {
 
             updateTicketsWithFactura(facturaCreated, factura.getTickets());
 
-            String token = JwtTokenUtil.generateToken(facturaCreated.getId(), 5);
+            String token = JwtTokenUtil.generateToken(facturaCreated.getId(), 60);
             TokenResponse response = new TokenResponse();
             response.setToken(token);
             return ResponseEntity.ok(response);
