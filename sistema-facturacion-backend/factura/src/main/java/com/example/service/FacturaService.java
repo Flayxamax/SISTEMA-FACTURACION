@@ -1,9 +1,10 @@
 package com.example.service;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.List;
 import java.util.Optional;
 import java.util.function.Function;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -13,12 +14,27 @@ import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuer
 import org.springframework.stereotype.Service;
 import com.example.factura.model.Factura;
 import com.example.repository.FacturaRepository;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 @Service
 public class FacturaService {
 
     @Autowired
     private FacturaRepository facturaRepository;
+
+    public File convertFacturaToXml(Factura factura) throws Exception {
+        XmlMapper xmlMapper = new XmlMapper();
+        xmlMapper.findAndRegisterModules();
+
+        String xmlContent = xmlMapper.writerWithDefaultPrettyPrinter().writeValueAsString(factura);
+
+        File tempFile = File.createTempFile("factura-" + factura.getId(), ".xml");
+        try (FileWriter writer = new FileWriter(tempFile)) {
+            writer.write(xmlContent);
+        }
+
+        return tempFile;
+    }
 
     public void flush() {
         facturaRepository.flush();

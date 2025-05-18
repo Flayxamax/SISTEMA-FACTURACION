@@ -26,7 +26,7 @@ public class FacturaApplication {
 			@Override
 			public void addCorsMappings(@SuppressWarnings("null") CorsRegistry registry) {
 				registry.addMapping("/**").allowedOrigins("http://localhost:4200").allowedMethods("*")
-						.allowedHeaders("*");
+						.allowedHeaders("*").exposedHeaders("Content-Disposition");
 			}
 		};
 	}

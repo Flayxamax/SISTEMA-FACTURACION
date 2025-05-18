@@ -1,10 +1,14 @@
 package com.example.factura.rest;
 
+import java.io.File;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -122,4 +126,15 @@ public class FacturaREST {
         }
     }
 
+    @GetMapping("/download-xml/{token}")
+    public ResponseEntity<FileSystemResource> descargarXml(@PathVariable String token) throws Exception {
+        Factura factura = getFacturaByToken(token).getBody();
+
+        File xmlFile = facturaService.convertFacturaToXml(factura);
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=factura-" + factura.getId() + ".xml")
+                .contentType(MediaType.APPLICATION_XML)
+                .body(new FileSystemResource(xmlFile));
+    }
 }
