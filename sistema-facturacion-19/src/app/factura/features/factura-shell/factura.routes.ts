@@ -13,4 +13,8 @@ export default [
     path: 'facturacion/:token',
     loadComponent: () => import('../factura-view/factura-view.component'),
   },
+  {
+    path: 'buscar-factura',
+    loadComponent: () => import('../factura-search-form/factura-search-form.component'),
+  },
 ] as Routes;

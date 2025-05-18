@@ -7,7 +7,7 @@
             <li class="relative w-full mb-6">
               <div class="flex items-center">
                 <div
-                  class="z-10 flex items-center justify-center w-6 h-6 bg-orange-600 rounded-full ring-0 ring-white dark:bg-orange-400 sm:ring-8 dark:ring-orange-400 shrink-0"
+                  class="z-10 flex items-center justify-center w-6 h-6 bg-orange-400 rounded-full ring-0 ring-orange-400 sm:ring-8 shrink-0"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -19,7 +19,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="w-4 h-4 text-orange-600 lg:w-6 lg:h-6 dark:text-white"
+                    class="w-4 h-4 text-white lg:w-6 lg:h-6"
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path
@@ -27,19 +27,19 @@
                     />
                   </svg>
                 </div>
-                <div class="flex w-full bg-gray-200 h-1 dark:bg-gray-700"></div>
+                <div class="flex w-full bg-gray-700 h-1"></div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-orange-500">Verificar ticket</h3>
+                <h3 class="font-bold text-orange-500">Verificar ticket</h3>
               </div>
             </li>
             <li class="relative w-full mb-6">
               <div class="flex items-center">
                 <div
-                  class="z-10 flex items-center justify-center w-6 h-6 bg-orange-600 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-700 shrink-0"
+                  class="z-10 flex items-center justify-center w-6 h-6 bg-gray-700 rounded-full ring-0 ring-gray-700 sm:ring-8 shrink-0"
                 >
                   <svg
-                    class="w-4 h-4 text-gray-500 lg:w-5 lg:h-5 dark:text-gray-100"
+                    class="w-4 h-4 text-gray-100 lg:w-5 lg:h-5"
                     aria-hidden="true"
                     xmlns="http://www.w3.org/2000/svg"
                     fill="currentColor"
@@ -50,16 +50,16 @@
                     />
                   </svg>
                 </div>
-                <div class="flex w-full bg-gray-200 h-1 dark:bg-gray-700"></div>
+                <div class="flex w-full bg-gray-700 h-1"></div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-gray-500">Ingresar datos</h3>
+                <h3 class="font-bold text-gray-500">Ingresar datos</h3>
               </div>
             </li>
             <li class="relative w-full mb-6">
               <div class="flex items-center">
                 <div
-                  class="z-10 flex items-center justify-center w-6 h-6 bg-orange-600 rounded-full ring-0 ring-white dark:bg-gray-700 sm:ring-8 dark:ring-gray-700 shrink-0"
+                  class="z-10 flex items-center justify-center w-6 h-6 bg-gray-700 rounded-full ring-0 ring-gray-700 sm:ring-8 shrink-0"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +71,7 @@
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="w-4 h-4 text-orange-600 lg:w-6 lg:h-6 dark:text-white"
+                    class="w-4 h-4 text-white lg:w-6 lg:h-6"
                   >
                     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                     <path d="M14 3v4a1 1 0 0 0 1 1h4" />
@@ -80,19 +80,69 @@
                 </div>
               </div>
               <div class="mt-3">
-                <h3 class="font-bold text-gray-900 dark:text-gray-500">Generar factura</h3>
+                <h3 class="font-bold text-gray-500">Generar factura</h3>
               </div>
             </li>
           </ol>
         </div>
 
-        <h2 class="mb-4 text-5xl font-light text-gray-900 dark:text-black mt-4">Facturación</h2>
+        <h2 class="mb-4 text-5xl font-light text-black mt-4">Facturación</h2>
+        <button
+          type="button"
+          (click)="openScanner()"
+          class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-3 me-2 mb-2"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            class="icon icon-tabler icons-tabler-filled icon-tabler-camera"
+          >
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path
+              d="M15 3a2 2 0 0 1 1.995 1.85l.005 .15a1 1 0 0 0 .883 .993l.117 .007h1a3 3 0 0 1 2.995 2.824l.005 .176v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9a3 3 0 0 1 2.824 -2.995l.176 -.005h1a1 1 0 0 0 1 -1a2 2 0 0 1 1.85 -1.995l.15 -.005h6zm-3 7a3 3 0 0 0 -2.985 2.698l-.011 .152l-.004 .15l.004 .15a3 3 0 1 0 2.996 -3.15z"
+            />
+          </svg>
+          Escanear QR
+        </button>
+        @if (showScanner) {
+          <div class="w-full max-w-md mx-auto my-4 p-4 bg-gray-50 rounded-lg shadow-md flex flex-col gap-4">
+            @if (hasDevices) {
+              <div>
+                <label for="deviceSelect" class="block mb-1 text-sm font-medium text-gray-700">Elegir cámara:</label>
+                <select
+                  id="deviceSelect"
+                  (change)="onDeviceSelectChange($event)"
+                  class="w-full p-2 border border-gray-300 rounded-md text-sm"
+                >
+                  <option *ngFor="let device of availableDevices" [value]="device.deviceId">
+                    {{ device.label || 'Cámara desconocida' }}
+                  </option>
+                </select>
+              </div>
+            }
+
+            <div class="w-full flex justify-start">
+              <zxing-scanner
+                class="w-full max-w-xs sm:max-w-sm md:max-w-md aspect-video rounded-md overflow-hidden"
+                [formats]="allowedFormats"
+                [autostart]="true"
+                [device]="selectedDevice"
+                (scanSuccess)="onCodeResult($event)"
+                (camerasFound)="onDevicesFound($event)"
+                (camerasNotFound)="onHasDevices(false)"
+                (scanError)="onError($event)"
+              ></zxing-scanner>
+            </div>
+          </div>
+        }
+
         <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
           <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
             <div class="sm:col-span-2">
-              <label for="name" class="block mb-2 text-3xl font-extralight text-gray-900 dark:text-black mt-4"
-                >Folio</label
-              >
+              <label for="name" class="block mb-2 text-3xl font-extralight text-black mt-4">Folio</label>
               <input
                 type="text"
                 name="folio"
@@ -101,15 +151,13 @@
                 [maxlength]="15"
                 [min]="1"
                 formControlName="folio"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full sm:w-1/2 p-3 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full sm:w-1/2 p-3 placeholder-slate-700"
                 placeholder="Ingrese el folio del ticket"
               />
               @if (isRequired('folio')) {
                 <small class="text-orange-400">Este campo es obligatorio</small>
               }
-              <label
-                for="codigoFacturacion"
-                class="block mb-2 text-3xl font-extralight text-gray-900 dark:text-black mt-8"
+              <label for="codigoFacturacion" class="block mb-2 text-3xl font-extralight text-black mt-8"
                 >Codigo de Facturación</label
               >
               <input
@@ -120,7 +168,7 @@
                 [maxlength]="15"
                 [min]="1"
                 formControlName="codigoFacturacion"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full sm:w-1/2 p-3 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-slate-700 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full sm:w-1/2 p-3 placeholder-slate-700"
                 placeholder="Ingrese el codigo de Facturación"
               />
               @if (isRequired('codigoFacturacion')) {
@@ -128,13 +176,11 @@
               }
             </div>
             <div>
-              <label for="sucursal" class="block mb-2 text-3xl font-extralight text-gray-900 dark:text-black"
-                >Sucursal</label
-              >
+              <label for="sucursal" class="block mb-2 text-3xl font-extralight text-black">Sucursal</label>
               <select
                 id="sucursal"
                 formControlName="sucursal"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 dark:bg-[#ededed] dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400"
               >
                 <option value="" disabled selected>Seleccione una sucursal</option>
                 @for (sucursal of sucursales; track sucursal) {
@@ -148,7 +194,7 @@
           </div>
           <button
             type="submit"
-            class="inline-flex items-center px-28 py-2.5 mt-4 sm:mt-6 text-sm font-bold text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-orange-600"
+            class="inline-flex items-center px-28 py-2.5 mt-4 sm:mt-6 text-sm font-bold text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-orange-600"
           >
             Siguiente
           </button>
