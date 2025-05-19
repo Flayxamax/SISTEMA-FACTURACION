@@ -108,7 +108,7 @@
           Escanear QR
         </button>
         @if (showScanner) {
-          <div class="w-full max-w-md mx-auto my-4 p-4 bg-gray-50 rounded-lg shadow-md flex flex-col gap-4">
+          <div class="w-full max-w-md my-4 p-4 bg-gray-50 rounded-lg shadow-md flex flex-col gap-4 items-start">
             @if (hasDevices) {
               <div>
                 <label for="deviceSelect" class="block mb-1 text-sm font-medium text-gray-700">Elegir cámara:</label>
@@ -174,13 +174,11 @@
               @if (isRequired('codigoFacturacion')) {
                 <small class="text-orange-400">Este campo es obligatorio</small>
               }
-            </div>
-            <div>
-              <label for="sucursal" class="block mb-2 text-3xl font-extralight text-black">Sucursal</label>
+              <label for="sucursal" class="block mb-2 text-3xl font-extralight text-black mt-8">Sucursal</label>
               <select
                 id="sucursal"
                 formControlName="sucursal"
-                class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full p-2.5 placeholder-gray-400"
+                class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full sm:w-1/2 p-3 placeholder-gray-400"
               >
                 <option value="" disabled selected>Seleccione una sucursal</option>
                 @for (sucursal of sucursales; track sucursal) {
@@ -200,7 +198,7 @@
           </button>
         </form>
       </div>
-      <div class="lg:w-1/3 mt-8 lg:mt-0">
+      <div class="lg:w-1/3 mt-8 lg:mt-28">
         <img src="assets/img/ticket_template.svg" alt="Ticket template" class="w-80 h-auto rounded-lg shadow-lg" />
       </div>
     </div>

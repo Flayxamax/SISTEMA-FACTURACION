@@ -31,7 +31,6 @@ export default class TicketFormComponent {
   sucursales: Sucursal[] = [];
 
   showScanner = false;
-
   allowedFormats = [BarcodeFormat.QR_CODE];
   scannedResult: string | null = null;
   hasDevices = false;

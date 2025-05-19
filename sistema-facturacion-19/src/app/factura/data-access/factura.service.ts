@@ -23,6 +23,12 @@ export class FacturaService extends BaseHttpService {
     return this._http.get<Factura>(`${this._apiUrl}/factura/${token}`);
   }
 
+  public getFacturaByTicket(folio: string, codigoFacturacion: string): Observable<string> {
+    return this._http
+      .get<TokenResponse>(`${this._apiUrl}/factura/factura-search/${folio}/${codigoFacturacion}`)
+      .pipe(map((response: TokenResponse) => response.token));
+  }
+
   public downloadFacturaXml(token: string): Observable<{ blob: Blob; filename: string }> {
     return this._http
       .get(`${this._apiUrl}/factura/download-xml/${token}`, {

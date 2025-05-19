@@ -58,7 +58,7 @@ public class FacturaREST {
 
             updateTicketsWithFactura(facturaCreated, factura.getTickets());
 
-            String token = JwtTokenUtil.generateToken(facturaCreated.getId(), 60);
+            String token = JwtTokenUtil.generateToken(facturaCreated.getId(), 20);
             TokenResponse response = new TokenResponse();
             response.setToken(token);
             return ResponseEntity.ok(response);
@@ -126,15 +126,56 @@ public class FacturaREST {
         }
     }
 
+    @GetMapping("/factura-search/{folio}/{codigoFacturacion}")
+    public ResponseEntity<TokenResponse> getFacturaByTicket(
+            @PathVariable String folio,
+            @PathVariable String codigoFacturacion) {
+        try {
+            Ticket ticket = ticketService.getByFolioAndCodigoFacturacion(
+                    Long.parseLong(folio),
+                    Long.parseLong(codigoFacturacion));
+
+            if (ticket == null) {
+                throw new BusinessException("T-404", "Ticket no encontrado", HttpStatus.NOT_FOUND);
+            }
+
+            if (ticket.getFactura() == null || ticket.getFactura().getId() == null) {
+                throw new BusinessException("T-102", "El ticket no se encuentra facturado", HttpStatus.NOT_FOUND);
+            }
+
+            String token = JwtTokenUtil.generateToken(ticket.getFactura().getId(), 20);
+            TokenResponse response = new TokenResponse();
+            response.setToken(token);
+            return ResponseEntity.ok(response);
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new BusinessException("F-101", "Error al buscar la factura", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
     @GetMapping("/download-xml/{token}")
-    public ResponseEntity<FileSystemResource> descargarXml(@PathVariable String token) throws Exception {
-        Factura factura = getFacturaByToken(token).getBody();
+    public ResponseEntity<FileSystemResource> downloadXML(@PathVariable String token) {
+        try {
+            Factura factura = getFacturaByToken(token).getBody();
+            if (factura == null) {
+                throw new BusinessException("F-404", "Factura no encontrada", HttpStatus.NOT_FOUND);
+            }
 
-        File xmlFile = facturaService.convertFacturaToXml(factura);
+            File xmlFile = facturaService.convertFacturaToXml(factura);
+            if (xmlFile == null || !xmlFile.exists()) {
+                throw new BusinessException("F-500", "No se pudo generar el archivo XML",
+                        HttpStatus.INTERNAL_SERVER_ERROR);
+            }
 
-        return ResponseEntity.ok()
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=factura-" + factura.getId() + ".xml")
-                .contentType(MediaType.APPLICATION_XML)
-                .body(new FileSystemResource(xmlFile));
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=factura-" + factura.getId() + ".xml")
+                    .contentType(MediaType.APPLICATION_XML)
+                    .body(new FileSystemResource(xmlFile));
+        } catch (BusinessException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new BusinessException("F-500", "Error al descargar el XML", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 }

@@ -25,7 +25,7 @@ public class TicketREST {
             if (ticket != null) {
                 return ResponseEntity.ok(ticket);
             } else {
-                throw new RequestException("T-102", "Ticket no encontrado");
+                throw new RequestException("T-404", "Ticket no encontrado");
             }
         } catch (RequestException e) {
             throw e;
@@ -48,7 +48,7 @@ public class TicketREST {
                     throw new RequestException("T-103", "Ticket ya facturado");
                 }
             } else {
-                throw new RequestException("T-102", "Ticket no encontrado");
+                throw new RequestException("T-404", "Ticket no encontrado");
             }
         } catch (RequestException e) {
             throw e;

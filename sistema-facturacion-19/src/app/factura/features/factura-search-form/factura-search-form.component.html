@@ -1,1 +1,101 @@
-<p>factura-search-form works!</p>
+<div class="container mx-auto mt-16 py-8 px-4">
+  <h2 class="mb-4 text-5xl font-light text-black mt-4">Buscar factura</h2>
+  <h2 class="mb-4 text-3xl font-light text-black mt-4">Ingrese los datos del ticket para encontrar su factura</h2>
+  <button
+    type="button"
+    (click)="openScanner()"
+    class="text-white bg-[#FF9119] hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center gap-3 me-2 mb-2"
+  >
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      class="icon icon-tabler icons-tabler-filled icon-tabler-camera"
+    >
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path
+        d="M15 3a2 2 0 0 1 1.995 1.85l.005 .15a1 1 0 0 0 .883 .993l.117 .007h1a3 3 0 0 1 2.995 2.824l.005 .176v9a3 3 0 0 1 -2.824 2.995l-.176 .005h-14a3 3 0 0 1 -2.995 -2.824l-.005 -.176v-9a3 3 0 0 1 2.824 -2.995l.176 -.005h1a1 1 0 0 0 1 -1a2 2 0 0 1 1.85 -1.995l.15 -.005h6zm-3 7a3 3 0 0 0 -2.985 2.698l-.011 .152l-.004 .15l.004 .15a3 3 0 1 0 2.996 -3.15z"
+      />
+    </svg>
+    Escanear QR
+  </button>
+
+  @if (showScanner) {
+    <div class="w-full max-w-md my-4 p-4 bg-gray-50 rounded-lg shadow-md flex flex-col gap-4 items-start">
+      @if (hasDevices) {
+        <div>
+          <label for="deviceSelect" class="block mb-1 text-sm font-medium text-gray-700">Elegir cámara:</label>
+          <select
+            id="deviceSelect"
+            (change)="onDeviceSelectChange($event)"
+            class="w-full p-2 border border-gray-300 rounded-md text-sm"
+          >
+            <option *ngFor="let device of availableDevices" [value]="device.deviceId">
+              {{ device.label || 'Cámara desconocida' }}
+            </option>
+          </select>
+        </div>
+      }
+
+      <div class="w-full flex justify-start">
+        <zxing-scanner
+          class="w-full max-w-xs sm:max-w-sm md:max-w-md aspect-video rounded-md overflow-hidden"
+          [formats]="allowedFormats"
+          [autostart]="true"
+          [device]="selectedDevice"
+          (scanSuccess)="onCodeResult($event)"
+          (camerasFound)="onDevicesFound($event)"
+          (camerasNotFound)="onHasDevices(false)"
+          (scanError)="onError($event)"
+        ></zxing-scanner>
+      </div>
+    </div>
+  }
+
+  <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
+    <div class="grid gap-4 sm:grid-cols-2 sm:gap-6">
+      <div class="sm:col-span-2">
+        <label for="name" class="block mb-2 text-3xl font-extralight text-black mt-4">Folio</label>
+        <input
+          type="text"
+          name="folio"
+          id="folio"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          [maxlength]="15"
+          [min]="1"
+          formControlName="folio"
+          class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full sm:w-2/6 p-3 placeholder-slate-700"
+          placeholder="Ingrese el folio del ticket"
+        />
+        @if (isRequired('folio')) {
+          <small class="text-orange-400">Este campo es obligatorio</small>
+        }
+        <label for="codigoFacturacion" class="block mb-2 text-3xl font-extralight text-black mt-8"
+          >Codigo de Facturación</label
+        >
+        <input
+          type="text"
+          name="codigoFacturacion"
+          id="codigoFacturacion"
+          onkeypress="return (event.charCode == 8 || event.charCode == 0 || event.charCode == 13) ? null : event.charCode >= 48 && event.charCode <= 57"
+          [maxlength]="15"
+          [min]="1"
+          formControlName="codigoFacturacion"
+          class="bg-[#ededed] border border-gray-600 text-black text-sm rounded-lg focus:ring-primary-500 focus:border-primary-500 block w-full sm:w-2/6 p-3 placeholder-slate-700"
+          placeholder="Ingrese el codigo de Facturación"
+        />
+        @if (isRequired('codigoFacturacion')) {
+          <small class="text-orange-400">Este campo es obligatorio</small>
+        }
+      </div>
+    </div>
+    <button
+      type="submit"
+      class="inline-flex items-center px-28 py-2.5 mt-4 sm:mt-6 text-sm font-bold text-center text-white bg-orange-400 rounded-lg focus:ring-4 focus:ring-primary-200 hover:bg-orange-600"
+    >
+      Buscar
+    </button>
+  </form>
+</div>

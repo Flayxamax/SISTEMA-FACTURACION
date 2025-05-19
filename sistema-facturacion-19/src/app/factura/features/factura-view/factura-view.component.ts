@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FacturaService } from '../../data-access/factura.service';
+import { toast } from 'ngx-sonner';
 
 @Component({
   selector: 'app-factura-view',
@@ -20,7 +21,7 @@ export default class FacturaViewComponent {
 
   downloadXML() {
     if (!this.token) {
-      console.error('Token is undefined. Cannot download XML.');
+      toast.error('Token invalido');
       return;
     }
 
@@ -35,9 +36,10 @@ export default class FacturaViewComponent {
         a.click();
         document.body.removeChild(a);
         window.URL.revokeObjectURL(url);
+        toast.success('Descarga factura XML exitosa');
       },
       error: (error) => {
-        console.error('Error al descargar XML', error);
+        toast.error(error);
       },
     });
   }

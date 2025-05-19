@@ -66,6 +66,15 @@ public class TicketService {
         return query.getResultStream().findFirst().orElse(null);
     }
 
+    public Ticket getByFolioAndCodigoFacturacion(Long folio, Long codigoFacturacion) {
+        String jpql = "SELECT t FROM Ticket t WHERE t.folio = :folio AND t.codigoFacturacion = :codigoFacturacion";
+        TypedQuery<Ticket> query = entityManager.createQuery(jpql, Ticket.class);
+        query.setParameter("folio", folio);
+        query.setParameter("codigoFacturacion", codigoFacturacion);
+
+        return query.getResultStream().findFirst().orElse(null);
+    }
+
     public Ticket getById(Long id) {
         return ticketRepository.findById(id).orElse(null);
     }
