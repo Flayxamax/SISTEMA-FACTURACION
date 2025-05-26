@@ -10,9 +10,9 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication(scanBasePackages = {
-		"com.example.service", "com.example.factura.rest", "com.example.repository" })
+		"com.example.service", "com.example.factura.rest", "com.example.repository", "com.example.factura.mapper" })
 @EnableAutoConfiguration
-@ComponentScan({ "com.example.service", "com.example.factura.rest", "com.example.repository" })
+@ComponentScan({ "com.example.service", "com.example.factura.rest", "com.example.repository", "com.example.factura.mapper" })
 @EnableJpaRepositories(basePackages = "com.example.repository")
 public class FacturaApplication {
 

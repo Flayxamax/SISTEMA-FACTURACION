@@ -1,9 +1,13 @@
 package com.example.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 import java.util.function.Function;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.Page;
@@ -11,10 +15,11 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.FluentQuery.FetchableFluentQuery;
 import org.springframework.stereotype.Service;
-
+import com.example.factura.model.Producto;
+import com.example.factura.model.Sucursal;
 import com.example.factura.model.Ticket;
+import com.example.factura.model.TipoPago;
 import com.example.repository.TicketRepository;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import jakarta.persistence.TypedQuery;
@@ -25,8 +30,55 @@ public class TicketService {
     @Autowired
     private TicketRepository ticketRepository;
 
+    @Autowired
+    private ProductoService productoService;
+
+    @Autowired
+    private SucursalService sucursalService;
+
     @PersistenceContext
     private EntityManager entityManager;
+
+    public void generateRandomTicket() {
+        Random random = new Random();
+
+        long folio = 1_000_000_000L + (Math.abs(random.nextLong()) % 9_000_000_000L);
+        long codigoFacturacion = 100_000L + (Math.abs(random.nextLong()) % 900_000L);
+
+        List<Sucursal> sucursales = sucursalService.findAll();
+        if (sucursales.isEmpty())
+            throw new IllegalStateException("No hay sucursales disponibles");
+        Sucursal sucursal = sucursales.get(random.nextInt(sucursales.size()));
+
+        List<Producto> productosDisponibles = productoService.findAll();
+        if (productosDisponibles.isEmpty())
+            throw new IllegalStateException("No hay productos disponibles");
+        int cantidadProductos = Math.min(1 + random.nextInt(5), productosDisponibles.size());
+        Collections.shuffle(productosDisponibles, random);
+        List<Producto> productosSeleccionados = new ArrayList<>(productosDisponibles.subList(0, cantidadProductos));
+
+        double subtotal = productosSeleccionados.stream()
+                .mapToDouble(Producto::getPrecio)
+                .sum();
+        double total = subtotal * 1.16;
+
+        LocalDate randomDate = LocalDate.now().minusDays(random.nextInt(30));
+        Date fecha = java.sql.Date.valueOf(randomDate);
+
+        TipoPago tipoPago = TipoPago.values()[random.nextInt(TipoPago.values().length)];
+
+        Ticket ticket = new Ticket(
+                fecha,
+                folio,
+                codigoFacturacion,
+                sucursal,
+                total,
+                subtotal,
+                tipoPago,
+                productosSeleccionados);
+
+        ticketRepository.save(ticket);
+    }
 
     public void flush() {
         ticketRepository.flush();

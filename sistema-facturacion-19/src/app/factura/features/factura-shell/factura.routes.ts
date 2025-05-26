@@ -17,4 +17,8 @@ export default [
     path: 'buscar-factura',
     loadComponent: () => import('../factura-search-form/factura-search-form.component'),
   },
+  {
+    path: 'generar-ticket',
+    loadComponent: () => import('../../../ticket/features/generate-ticket/generate-ticket.component'),
+  },
 ] as Routes;

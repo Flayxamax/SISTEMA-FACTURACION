@@ -3,7 +3,8 @@ package com.example.factura.model;
 import java.util.Date;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -13,13 +14,13 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
 @Entity
 @Data
 @Table(name = "ticket")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Ticket {
 
     @Id
@@ -32,7 +33,7 @@ public class Ticket {
 
     private Long codigoFacturacion;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "sucursal_id", referencedColumnName = "id")
     private Sucursal sucursal;
 
@@ -44,7 +45,6 @@ public class Ticket {
 
     @ManyToOne
     @JoinColumn(name = "factura_id", referencedColumnName = "id")
-    @JsonIgnore
     private Factura factura;
 
     @ManyToMany

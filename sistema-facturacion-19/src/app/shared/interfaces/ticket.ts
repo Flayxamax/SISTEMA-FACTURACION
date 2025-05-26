@@ -1,5 +1,6 @@
 import { Producto } from './producto';
 import { Sucursal } from './sucursal';
+import { Factura } from './factura';
 
 export interface Ticket {
   id: number;
@@ -9,7 +10,7 @@ export interface Ticket {
   sucursal: Sucursal;
   total: number;
   tipoPago: string;
-  factura: any;
+  factura: Factura | null;
   productos: Producto[];
   subTotal: number;
 }
